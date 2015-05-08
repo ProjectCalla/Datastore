@@ -15,7 +15,7 @@ class ScheduleItem(ndb.Model):
 
 class Schedule(ndb.Model):
     day = ndb.StringProperty()
-    schedule_item = ndb.KeyProperty(kind='ScheduleItem', repeated=True)
+    schedule_item = ndb.KeyProperty(kind='ScheduleItem', repeated=True, indexed=True)
 
 
 class Grade(ndb.Model):
@@ -47,3 +47,4 @@ class Student(ndb.Model):
     zip_address = ndb.StringProperty()
     street = ndb.StringProperty()
     schedule = ndb.KeyProperty(kind='Schedule', repeated=True)
+    grade_list = ndb.KeyProperty(kind='GradesList', repeated=True, indexed=True)

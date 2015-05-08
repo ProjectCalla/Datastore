@@ -1,7 +1,7 @@
 import cgi
 from google.appengine.api import users
 import webapp2
-from models import student_key, ScheduleItem, Schedule, Student
+from models import student_key, ScheduleItem, Schedule, Student , Grade, GradesList
 import logging
 from google.appengine.ext import ndb
 
@@ -70,7 +70,23 @@ class Guestbook(webapp2.RequestHandler):
         schedule=Schedule(day='Monday',
                           schedule_item=schedule_item_keys)
 
-        schedule_key = schedule.put()
+        schedule_key = [schedule.put()]
+
+        grade=Grade(study_points=3,
+                           passed=True,
+                           grades=[7],
+                           docent='busker',
+                           concept=False,
+                           exam_date='1-5-2015',
+                           mutation_date='5-5-2015',
+                           weight=1)
+
+        grade_key =grade.put()
+
+        grades_list = GradesList(vak_code='dev04',
+                                 grades=grade_key)
+
+        grades_list_key = [grades_list.put()]
 
         student = Student(
             parent=student_key(key=883374),
@@ -85,14 +101,19 @@ class Guestbook(webapp2.RequestHandler):
             groups=['inf1F', 'inf2c'],
             zip_address='3142LP',
             street='sparrendal',
-            schedule=[schedule_key]
+            schedule=schedule_key,
+            grade_list=grades_list_key
         )
         student.put()
-        schedule=student.schedule[0].get()
-        schedule_item = schedule.schedule_item[0].get()
-        self.response.write(schedule_item.time_from+" - "+schedule_item.time_until+"<br>" +
-                            schedule_item.vak_code+"<br>" +schedule_item.docent_code +"<br>" +
-                            schedule_item.chamber)
+        schedule = student.schedule[0].get()
+        schedule_items = schedule.schedule_item
+        printt = ''
+        for schedule_item in schedule_items:
+            schedule_item = schedule_item.get()
+            printt += "<p>" +schedule_item.time_from+" - " + schedule_item.time_until + "<br>" + schedule_item.vak_code\
+                      + "<br>" + schedule_item.docent_code + "<br>"+ schedule_item.chamber + "</p><br><br><br>"
+
+        self.response.write(printt)
         # logging.INFO(student.schedule[0].get())
 
 
