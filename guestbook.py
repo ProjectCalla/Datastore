@@ -99,7 +99,7 @@ class Guestbook(webapp2.RequestHandler):
             email='geddy@geddy.nl',
             telephone_nr='0653380120',
             groups=['inf1F', 'inf2c'],
-            zip_address='3142LP',
+            zip_address='3142-LP',
             street='sparrendal',
             schedule=schedule_key,
             grade_list=grades_list_key
@@ -107,16 +107,14 @@ class Guestbook(webapp2.RequestHandler):
         student.put()
         schedule = student.schedule[0].get()
         schedule_items = schedule.schedule_item
-        printt = ''
+        pin = ''
         for schedule_item in schedule_items:
             schedule_item = schedule_item.get()
-            printt += "<p>" +schedule_item.time_from+" - " + schedule_item.time_until + "<br>" + schedule_item.vak_code\
-                      + "<br>" + schedule_item.docent_code + "<br>"+ schedule_item.chamber + "</p><br><br><br>"
+            pin += "<p>" + schedule_item.time_from+" - " + schedule_item.time_until + "<br>" + schedule_item.vak_code\
+                      + "<br>" + schedule_item.docent_code + "<br>" + schedule_item.chamber + "</p><br><br><br>"
 
-        self.response.write(printt)
+        self.response.write(pi)
         # logging.INFO(student.schedule[0].get())
-
-
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
