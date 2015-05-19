@@ -49,7 +49,22 @@ class MainPage(webapp2.RequestHandler):
                 data.append(vak_code)
                 obj = {'vak_code': vak_code, 'grade': grade}
 
+                # # Get schedule item
+                # for gradee in grades:
+                #     grad = gradee.get()
+                #
+                #     data.append(vak_code)
+                #     obj = {'vak_code': vak_code,'grade': grad.grades[0]}
+
         self.response.write(obj)
+        # self.response.write(MAIN_PAGE_FOOTER_TEMPLATE)
+        # obj = {
+        #                 'grade': cijfer.grades[0],
+        #                 'vak': ,
+        #               }
+        #
+        # self.response.headers['Content-Type'] = 'application/json'
+        # self.response.out.write(json.dumps(obj))
 
 
 class Guestbook(webapp2.RequestHandler):

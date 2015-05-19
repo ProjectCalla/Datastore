@@ -99,10 +99,14 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+<<<<<<< HEAD
 .idea/workspace.xml
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+=======
+
+>>>>>>> origin/master
 *.xml
 >>>>>>> origin/master
 =======
