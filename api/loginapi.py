@@ -11,12 +11,15 @@ html = """
             <h1>Student login details</h1>
             <form method="post">
                 <label for="studentnummer">studentnummer:</label>
-                <input name="studentnummer" type="text" value""><br>
+                <input name="studentnummer" type="text" value"">
+                <br>
+                <br>
+                <label for="wachtwoord">wachtwoord:</label>
+                <input name="wachtwoord" type="text" value="">
+                <br>
+                <br>
 
-                <label for="wachtwoord">Wachtwoord:</label>
-                <input name="wachtwoord" type="text" value=""><br>
-
-                <input name="" type="submit" value="">
+                <input name="" type="submit" value="inloggen">
             </form>
     </body>
 </html>
@@ -29,7 +32,7 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         studentnummer = self.request.get("studentnummer")
         wachtwoord = self.request.get("wachtwoord")
-        self.response.out.write(studentnummer + " <br> " + wachtwoord)
+        self.response.out.write("Studentnummer   " + studentnummer + " <br> " + "Wachtwoord   " + wachtwoord)
 
 app = webapp2.WSGIApplication([('/', MainHandler)],
                                 debug=True)
