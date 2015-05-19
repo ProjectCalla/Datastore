@@ -1,10 +1,12 @@
-import cgi
 from google.appengine.api import users
 import webapp2
-from models import student_key, ScheduleItem, Schedule, Student , Grade, GradesList
+from google.appengine.ext import ndb
+
+import cgi
+from models.models import student_key, ScheduleItem, Schedule, Student , Grade, GradesList
 import json
 import logging
-from google.appengine.ext import ndb
+
 
 MAIN_PAGE_FOOTER_TEMPLATE = """\
     <form action="/sign?%s" method="post">
