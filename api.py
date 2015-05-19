@@ -21,6 +21,10 @@ MAIN_PAGE_FOOTER_TEMPLATE = """\
 </html>
 """
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 53d274e34f0328719fe846a9a1c20c1d3966a519
 class Testdata(webapp2.RequestHandler):
     def get(self):
         self.response.write(MAIN_PAGE_FOOTER_TEMPLATE)
