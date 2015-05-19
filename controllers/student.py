@@ -9,6 +9,8 @@ class test(webapp2.RequestHandler):
         logging.info(a);
 
 
-class Check(object):
-    def check_student(self,studentnr,password):
-        logging.info("We here")
+class CheckStudent(object):
+    def __init__(self, nr, ww):
+        self.nr = nr
+        self.ww = ww
+        logging.info(nr)
