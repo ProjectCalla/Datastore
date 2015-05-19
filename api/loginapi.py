@@ -32,7 +32,13 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         studentnummer = self.request.get("studentnummer")
         wachtwoord = self.request.get("wachtwoord")
+<<<<<<< HEAD
         self.response.out.write("Studentnummer   " + studentnummer + " <br> " + "Wachtwoord   " + wachtwoord)
+=======
+>>>>>>> origin/dev
 
-app = webapp2.WSGIApplication([('/', MainHandler)],
-                                debug=True)
+        # This is for check if student exists
+        from controllers.student import CheckStudent
+        CheckStudent(studentnummer, wachtwoord)
+
+        self.response.out.write('done')
