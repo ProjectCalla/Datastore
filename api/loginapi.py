@@ -32,10 +32,8 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         studentnummer = self.request.get("studentnummer")
         wachtwoord = self.request.get("wachtwoord")
-<<<<<<< HEAD
         self.response.out.write("Studentnummer   " + studentnummer + " <br> " + "Wachtwoord   " + wachtwoord)
-=======
->>>>>>> origin/dev
+
 
         # This is for check if student exists
         from controllers.student import CheckStudent
