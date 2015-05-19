@@ -1,10 +1,12 @@
-import cgi
 from google.appengine.api import users
 import webapp2
-from models import student_key, ScheduleItem, Schedule, Student , Grade, GradesList
+from google.appengine.ext import ndb
+
+import cgi
+from models.models import student_key, ScheduleItem, Schedule, Student , Grade, GradesList
 import json
 import logging
-from google.appengine.ext import ndb
+
 
 MAIN_PAGE_FOOTER_TEMPLATE = """\
     <form action="/sign?%s" method="post">
@@ -20,7 +22,6 @@ MAIN_PAGE_FOOTER_TEMPLATE = """\
   </body>
 </html>
 """
-
 
 class Testdata(webapp2.RequestHandler):
     def get(self):
@@ -46,7 +47,22 @@ class MainPage(webapp2.RequestHandler):
                 data.append(vak_code)
                 obj = {'vak_code': vak_code, 'grade': grade}
 
+                # # Get schedule item
+                # for gradee in grades:
+                #     grad = gradee.get()
+                #
+                #     data.append(vak_code)
+                #     obj = {'vak_code': vak_code,'grade': grad.grades[0]}
+
         self.response.write(obj)
+        # self.response.write(MAIN_PAGE_FOOTER_TEMPLATE)
+        # obj = {
+        #                 'grade': cijfer.grades[0],
+        #                 'vak': ,
+        #               }
+        #
+        # self.response.headers['Content-Type'] = 'application/json'
+        # self.response.out.write(json.dumps(obj))
 
 
 class Guestbook(webapp2.RequestHandler):
