@@ -8,4 +8,6 @@ threadsafe: true
 basic_scaling:
   max_instances: 1
 
-#TODO added dipatch yaml for controlling the modules
+handlers:
+- url: /controllers
+  script: .*
