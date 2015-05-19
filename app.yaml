@@ -15,6 +15,9 @@ handlers:
 - url: /processing
   script: .*
 
+- url: /api
+  script: .*
+
 - url: /.*
   script: main.app
 # [END handlers]
