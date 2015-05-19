@@ -6,6 +6,15 @@ threadsafe: true
 
 # [START handlers]
 handlers:
+- url: /controllers
+  script: .*
+
+- url: /models
+  script: .*
+
+- url: /processing
+  script: .*
+
 - url: /.*
   script: main.app
 # [END handlers]

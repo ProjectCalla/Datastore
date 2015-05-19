@@ -1,9 +1,11 @@
 from google.appengine.api import users
 import webapp2
+from webapp2_extras import routes
 from google.appengine.ext import ndb
 
 import cgi
 from models.models import student_key, ScheduleItem, Schedule, Student , Grade, GradesList
+from google.appengine.api import taskqueue
 import json
 import logging
 
@@ -46,6 +48,8 @@ class MainPage(webapp2.RequestHandler):
                 grade = grades.grades
                 data.append(vak_code)
                 obj = {'vak_code': vak_code, 'grade': grade}
+
+        taskqueue.add(url='/controllers/student')
 
                 # # Get schedule item
                 # for gradee in grades:
@@ -136,6 +140,7 @@ class Guestbook(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/sign', Guestbook),
+    ('/controllers/student','controllers.student.test'),
     ('/testdata', Testdata)
 
 ], debug=True)
