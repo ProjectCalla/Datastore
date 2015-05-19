@@ -1,13 +1,8 @@
-from google.appengine.api import users
-import webapp2
-from webapp2_extras import routes
-from google.appengine.ext import ndb
 
-import cgi
+import webapp2
 from models.models import student_key, ScheduleItem, Schedule, Student , Grade, GradesList
 from google.appengine.api import taskqueue
-import json
-import logging
+
 
 
 MAIN_PAGE_FOOTER_TEMPLATE = """\
@@ -31,7 +26,7 @@ class Testdata(webapp2.RequestHandler):
 
 
 class MainPage(webapp2.RequestHandler):
-    def get(self,student_nr=883374):
+    def get(self, student_nr=883374):
         student_query = Student.query(
             ancestor=student_key(key=student_nr)).order(Student.student_nr)
         students = student_query.fetch(1)
@@ -51,22 +46,7 @@ class MainPage(webapp2.RequestHandler):
 
         taskqueue.add(url='/controllers/student')
 
-                # # Get schedule item
-                # for gradee in grades:
-                #     grad = gradee.get()
-                #
-                #     data.append(vak_code)
-                #     obj = {'vak_code': vak_code,'grade': grad.grades[0]}
-
         self.response.write(obj)
-        # self.response.write(MAIN_PAGE_FOOTER_TEMPLATE)
-        # obj = {
-        #                 'grade': cijfer.grades[0],
-        #                 'vak': ,
-        #               }
-        #
-        # self.response.headers['Content-Type'] = 'application/json'
-        # self.response.out.write(json.dumps(obj))
 
 
 class Guestbook(webapp2.RequestHandler):
