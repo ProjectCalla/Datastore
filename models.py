@@ -21,7 +21,7 @@ class Schedule(ndb.Model):
 class Grade(ndb.Model):
     study_points = ndb.IntegerProperty()
     passed = ndb.BooleanProperty()
-    grades = ndb.FloatProperty(repeated=True, indexed=True)
+    grades = ndb.FloatProperty()
     docent = ndb.StringProperty()
     concept = ndb.BooleanProperty()
     exam_date = ndb.StringProperty()  # changed later to DateProperty
@@ -31,7 +31,7 @@ class Grade(ndb.Model):
 
 class GradesList(ndb.Model):
     vak_code = ndb.StringProperty()
-    grades = ndb.KeyProperty(kind=Grade)
+    grades = ndb.KeyProperty(kind='Grade')
 
 
 class Student(ndb.Model):
@@ -47,4 +47,4 @@ class Student(ndb.Model):
     zip_address = ndb.StringProperty()
     street = ndb.StringProperty()
     schedule = ndb.KeyProperty(kind='Schedule', repeated=True)
-    grade_list = ndb.KeyProperty(kind='GradesList', repeated=True, indexed=True)
+    grade_list = ndb.KeyProperty(kind='GradesList', repeated=True)

@@ -2,6 +2,7 @@ import cgi
 from google.appengine.api import users
 import webapp2
 from models import student_key, ScheduleItem, Schedule, Student , Grade, GradesList
+import json
 import logging
 from google.appengine.ext import ndb
 
@@ -27,25 +28,40 @@ class Testdata(webapp2.RequestHandler):
 
 
 class MainPage(webapp2.RequestHandler):
-    def get(self):
+    def get(self,student_nr=883374):
         student_query = Student.query(
-            ancestor=student_key(key=883374)).order(Student.student_nr)
+            ancestor=student_key(key=student_nr)).order(Student.student_nr)
         students = student_query.fetch(1)
 
         data = []
         # Get student
         for student in students:
             # Get schedule
-            for schedule in student.schedule:
-                schedule = schedule.get()
-                item = schedule.schedule_item
-                # Get schedule item
-                for lesson in item:
-                    les = lesson.get()
-                    data.append(les.vak_code)
+            for grade_list in student.grade_list:
+                grade_listt = grade_list.get()
+                item = grade_listt.grades
+                vak_code = grade_listt.vak_code
+                grades = grade_listt.grades.get()
+                grade = grades.grades
+                data.append(vak_code)
+                obj = {'vak_code': vak_code, 'grade': grade}
 
-        self.response.write(data)
+                # # Get schedule item
+                # for gradee in grades:
+                #     grad = gradee.get()
+                #
+                #     data.append(vak_code)
+                #     obj = {'vak_code': vak_code,'grade': grad.grades[0]}
+
+        self.response.write(obj)
         # self.response.write(MAIN_PAGE_FOOTER_TEMPLATE)
+        # obj = {
+        #                 'grade': cijfer.grades[0],
+        #                 'vak': ,
+        #               }
+        #
+        # self.response.headers['Content-Type'] = 'application/json'
+        # self.response.out.write(json.dumps(obj))
 
 
 class Guestbook(webapp2.RequestHandler):
@@ -67,21 +83,21 @@ class Guestbook(webapp2.RequestHandler):
         for i in schedule_items:
             schedule_item_keys.append(i.put())
 
-        schedule=Schedule(day='Monday',
-                          schedule_item=schedule_item_keys)
+        schedule = Schedule(day='Monday',
+                            schedule_item=schedule_item_keys)
 
         schedule_key = [schedule.put()]
 
-        grade=Grade(study_points=3,
-                           passed=True,
-                           grades=[7],
-                           docent='busker',
-                           concept=False,
-                           exam_date='1-5-2015',
-                           mutation_date='5-5-2015',
-                           weight=1)
+        grade = Grade(study_points=3,
+                      passed=True,
+                      grades=7.0,
+                      docent='busker',
+                      concept=False,
+                      exam_date='1-5-2015',
+                      mutation_date='5-5-2015',
+                      weight=1)
 
-        grade_key =grade.put()
+        grade_key = grade.put()
 
         grades_list = GradesList(vak_code='dev04',
                                  grades=grade_key)
@@ -113,7 +129,7 @@ class Guestbook(webapp2.RequestHandler):
             pin += "<p>" + schedule_item.time_from+" - " + schedule_item.time_until + "<br>" + schedule_item.vak_code\
                       + "<br>" + schedule_item.docent_code + "<br>" + schedule_item.chamber + "</p><br><br><br>"
 
-        self.response.write(pi)
+        self.response.write(pin)
         # logging.INFO(student.schedule[0].get())
 
 app = webapp2.WSGIApplication([
