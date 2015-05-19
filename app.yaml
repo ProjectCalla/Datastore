@@ -6,9 +6,6 @@ threadsafe: true
 
 # [START handlers]
 handlers:
-- url: /controllers
-  script: .*
-
 - url: /models
   script: .*
 
