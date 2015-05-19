@@ -21,7 +21,7 @@ MAIN_PAGE_FOOTER_TEMPLATE = """\
 </html>
 """
 
-
+#test
 class Testdata(webapp2.RequestHandler):
     def get(self):
         self.response.write(MAIN_PAGE_FOOTER_TEMPLATE)
