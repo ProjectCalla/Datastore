@@ -121,6 +121,7 @@ app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/sign', Guestbook),
     ('/controllers/student','controllers.student.test'),
-    ('/testdata', Testdata)
+    ('/testdata', Testdata),
+    ('/abedtest', 'api.loginapi.MainHandler')
 
 ], debug=True)

@@ -8,13 +8,28 @@ html = """
         <title>Login Form</title>
     </head>
     <body>
-        <h1>Student login details</h1>
+            <h1>Student login details</h1>
+            <form method="post">
+                <label for="studentnummer">studentnummer:</label>
+                <input name="studentnummer" type="text" value""><br>
+
+                <label for="wachtwoord">Wachtwoord:</label>
+                <input name="wachtwoord" type="text" value=""><br>
+
+                <input name="" type="submit" value="">
+            </form>
     </body>
 </html>
 """
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.out.write('Hello')
+        self.response.out.write(html)
 
-app = webapp2.WSGIApplication
+    def post(self):
+        studentnummer = self.request.get("studentnummer")
+        wachtwoord = self.request.get("wachtwoord")
+        self.response.out.write(studentnummer + " <br> " + wachtwoord)
+
+app = webapp2.WSGIApplication([('/', MainHandler)],
+                                debug=True)
