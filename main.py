@@ -112,7 +112,7 @@ class Guestbook(webapp2.RequestHandler):
         for schedule_item in schedule_items:
             schedule_item = schedule_item.get()
             pin += "<p>" + schedule_item.time_from+" - " + schedule_item.time_until + "<br>" + schedule_item.vak_code\
-                      + "<br>" + schedule_item.docent_code + "<br>" + schedule_item.chamber + "</p><br><br><br>"
+                      +"<br>" + schedule_item.docent_code + "<br>" + schedule_item.chamber + "</p><br><br><br>"
 
         self.response.write(pin)
         # logging.INFO(student.schedule[0].get())
@@ -120,7 +120,7 @@ class Guestbook(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/sign', Guestbook),
-    ('/controllers/student','controllers.student.test'),
+    # ('/controllers/student','controllers.student.test'),
     ('/testdata', Testdata),
     ('/abedtest', 'api.loginapi.MainHandler')
 

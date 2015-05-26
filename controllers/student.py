@@ -6,7 +6,7 @@ import logging
 class test(webapp2.RequestHandler):
     def post(self):
         a = "testen"
-        logging.info(a);
+        logging.info(a)
 
 
 class CheckStudent(object):
