@@ -29,7 +29,7 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.out.write(html)
 
-    def post(self):
+    def post(self,studentnummer,password):
         studentnummer = self.request.get("studentnummer")
         wachtwoord = self.request.get("wachtwoord")
         self.response.out.write("Studentnummer   " + studentnummer + " <br> " + "Wachtwoord   " + wachtwoord)

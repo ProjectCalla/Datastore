@@ -121,8 +121,6 @@ class Guestbook(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/sign', Guestbook),
-    ('/testdata', Testdata)
-    ('/abedtest', 'api.loginapi.MainHandler')
-
-
+    ('/testdata', Testdata),
+    ('/login', 'api.loginapi.MainHandler')
 ], debug=True)
