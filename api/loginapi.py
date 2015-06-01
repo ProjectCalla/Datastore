@@ -1,4 +1,5 @@
 import webapp2
+from google.appengine.api import taskqueue
 
 html = """
 <!doctype html>
@@ -10,12 +11,12 @@ html = """
     <body>
             <h1>Student login details</h1>
             <form method="post">
-                <label for="studentnummer">studentnummer:</label>
-                <input name="studentnummer" type="text" value"">
+                <label for="username">studentnummer:</label>
+                <input name="username" type="text" value"">
                 <br>
                 <br>
-                <label for="wachtwoord">wachtwoord:</label>
-                <input name="wachtwoord" type="text" value="">
+                <label for="password">wachtwoord:</label>
+                <input name="password" type="text" value="">
                 <br>
                 <br>
 
@@ -29,14 +30,11 @@ class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.out.write(html)
 
-    def post(self,studentnummer,password):
-        studentnummer = self.request.get("studentnummer")
-        wachtwoord = self.request.get("wachtwoord")
-        self.response.out.write("Studentnummer   " + studentnummer + " <br> " + "Wachtwoord   " + wachtwoord)
-
-
+    def post(self):
+        username = self.request.get("username")
+        password = self.request.get("password")
         # This is for check if student exists
         from controllers.student import CheckStudent
-        CheckStudent(studentnummer, wachtwoord)
+        CheckStudent(username, password)
 
-        self.response.out.write('done')
+        taskqueue.add(url='/controllers/student', params={'username':username,'password':password})

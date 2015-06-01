@@ -12,3 +12,7 @@ automatic_scaling:
 handlers:
 - url: /.*
   script: mainProcess.app
+
+libraries:
+- name: webapp2
+  version: latest

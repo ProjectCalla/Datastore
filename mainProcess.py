@@ -1,5 +1,5 @@
 import webapp2
 
 app = webapp2.WSGIApplication([
-    ('/controllers/student', 'controllers.student.test'),
+    ('/controllers/student', 'controllers.student.CheckStudent')
 ], debug=True)

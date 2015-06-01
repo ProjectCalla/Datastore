@@ -1,7 +1,6 @@
 
 import webapp2
 from models.models import student_key, ScheduleItem, Schedule, Student , Grade, GradesList
-from google.appengine.api import taskqueue
 
 import json
 import logging
@@ -27,27 +26,8 @@ class Testdata(webapp2.RequestHandler):
 
 
 class MainPage(webapp2.RequestHandler):
-    def get(self, student_nr=883374):
-        student_query = Student.query(
-            ancestor=student_key(key=student_nr)).order(Student.student_nr)
-        students = student_query.fetch(1)
-
-        data = []
-        # Get student
-        for student in students:
-            # Get schedule
-            for grade_list in student.grade_list:
-                grade_listt = grade_list.get()
-                item = grade_listt.grades
-                vak_code = grade_listt.vak_code
-                grades = grade_listt.grades.get()
-                grade = grades.grades
-                data.append(vak_code)
-                obj = {'vak_code': vak_code, 'grade': grade}
-
-        taskqueue.add(url='/controllers/student')
-
-        self.response.write(obj)
+    def get(self, username=883374):
+        self.response.write(MAIN_PAGE_FOOTER_TEMPLATE)
 
 
 class Guestbook(webapp2.RequestHandler):
@@ -91,8 +71,8 @@ class Guestbook(webapp2.RequestHandler):
         grades_list_key = [grades_list.put()]
 
         student = Student(
-            parent=student_key(key=883374),
-            student_nr=883374,
+            parent=student_key(key="0883374"),
+            student_nr="0883374",
             password='Hello',
             first_name='Geddy',
             last_name='Schellevis',
@@ -120,7 +100,10 @@ class Guestbook(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
+    ('/grades','api.api.grade'),
     ('/sign', Guestbook),
     ('/testdata', Testdata),
-    ('/login', 'api.loginapi.MainHandler')
+    ('/login', 'api.loginapi.MainHandler'),
+    # ('/controllers/student', 'controllers.student.CheckStudent')
+
 ], debug=True)

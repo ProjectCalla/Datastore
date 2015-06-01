@@ -35,7 +35,7 @@ class GradesList(ndb.Model):
 
 
 class Student(ndb.Model):
-    student_nr = ndb.IntegerProperty()
+    student_nr = ndb.StringProperty()
     password = ndb.StringProperty()
     first_name = ndb.StringProperty()
     last_name = ndb.StringProperty()
