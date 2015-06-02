@@ -1,8 +1,7 @@
-
 from google.appengine.api import taskqueue
 import webapp2
 import logging
-from models.models import student_key,Student
+from models.models import student_key, Student
 
 class CheckStudent(webapp2.RequestHandler):
     def post(self):
@@ -16,5 +15,6 @@ class CheckStudent(webapp2.RequestHandler):
         if students:
             logging.info("student bestaat al")
         else:
+            # call the crawler api for injecting the user to the crawler
             logging.info(username)
             logging.info(password)

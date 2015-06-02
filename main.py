@@ -77,12 +77,12 @@ class Guestbook(webapp2.RequestHandler):
             first_name='Geddy',
             last_name='Schellevis',
             country='Nederland',
-            birthday='05-05-0-1990',
+            birthday='05-03-1990',
             email='geddy@geddy.nl',
             telephone_nr='0653380120',
             groups=['inf1F', 'inf2c'],
-            zip_address='3142-LP',
-            street='sparrendal',
+            zip_address='4444-LP',
+            street='ergens',
             schedule=schedule_key,
             grade_list=grades_list_key
         )

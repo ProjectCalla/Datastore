@@ -34,7 +34,5 @@ class MainHandler(webapp2.RequestHandler):
         username = self.request.get("username")
         password = self.request.get("password")
         # This is for check if student exists
-        from controllers.student import CheckStudent
-        CheckStudent(username, password)
 
         taskqueue.add(url='/controllers/student', params={'username':username,'password':password})
