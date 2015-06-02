@@ -26,7 +26,7 @@ class Testdata(webapp2.RequestHandler):
 
 
 class MainPage(webapp2.RequestHandler):
-    def get(self, username=883374):
+    def get(self):
         self.response.write(MAIN_PAGE_FOOTER_TEMPLATE)
 
 
