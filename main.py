@@ -20,6 +20,7 @@ MAIN_PAGE_FOOTER_TEMPLATE = """\
 </html>
 """
 
+
 class Testdata(webapp2.RequestHandler):
     def get(self):
         self.response.write(MAIN_PAGE_FOOTER_TEMPLATE)
@@ -90,6 +91,7 @@ class Guestbook(webapp2.RequestHandler):
         schedule = student.schedule[0].get()
         schedule_items = schedule.schedule_item
         pin = ''
+
         for schedule_item in schedule_items:
             schedule_item = schedule_item.get()
             pin += "<p>" + schedule_item.time_from+" - " + schedule_item.time_until + "<br>" + schedule_item.vak_code\
