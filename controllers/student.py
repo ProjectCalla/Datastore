@@ -7,17 +7,26 @@ class CheckStudent(webapp2.RequestHandler):
     def post(self):
         username = self.request.get("username")
         password = self.request.get("password")
+        regId = self.request.get("regId")
 
         student_query = Student.query(
             ancestor=student_key(key=username)).order(Student.student_nr)
         students = student_query.fetch(1)
-
+        logging.info(students)
         if students:
             logging.info("student bestaat al")
         else:
             # call the crawler api for injecting the user to the crawler
             logging.info(username)
             logging.info(password)
+
+            student = Student(
+                parent=student_key(key=username),
+                student_nr=username,
+                password=password,
+                registration_id=regId
+            )
+            student.put()
 
 
 class SaveNewUser(webapp2.RequestHandler):

@@ -48,3 +48,6 @@ class Student(ndb.Model):
     street = ndb.StringProperty()
     schedule = ndb.KeyProperty(kind='Schedule', repeated=True)
     grade_list = ndb.KeyProperty(kind='GradesList', repeated=True)
+    registration_id = ndb.StringProperty()
+    last_edit_time = ndb.StringProperty()
+    last_edit_date = ndb.StringProperty()

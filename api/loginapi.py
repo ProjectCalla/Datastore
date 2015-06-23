@@ -1,5 +1,6 @@
 import webapp2
 from google.appengine.api import taskqueue
+import logging
 
 html = """
 <!doctype html>
@@ -19,6 +20,10 @@ html = """
                 <input name="password" type="text" value="">
                 <br>
                 <br>
+                <label for="regId">regId:</label>
+                <input name="regId" type="text" value="">
+                <br>
+                <br>
 
                 <input name="" type="submit" value="inloggen">
             </form>
@@ -33,6 +38,10 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         username = self.request.get("username")
         password = self.request.get("password")
+        regId = self.request.get("regId")
+
+        logging.info(username)
+        logging.info(password)
         # This is for check if student exists
 
-        taskqueue.add(url='/controllers/student', params={'username':username,'password':password})
+        taskqueue.add(url='/controllers/student', params={'username':username,'password':password,"regId":regId})
